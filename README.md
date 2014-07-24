@@ -9,6 +9,7 @@ Saclay group MinitreeFitter: make workspace and dataset for Hgg analysis
 1. Fork MinitreeFitter in https://github.com/fcouderc/MinitreeFitter
 2. Go to an lxplus machine (SLC6 but SLC5 should work just as good)
 3. Download MinitreeFitter:
+
    git clone git@github.com:fcouderc/MiniTreeFitter MiniTreeFitter
    cd MiniTreeFitter
    source etc/scripts/setup.sh
