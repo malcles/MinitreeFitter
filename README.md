@@ -37,7 +37,7 @@ git is managing everything locally, once you are happy with a snapshot of your w
    - git fetch ALIAS BRANCH   
    - git pull ALIAS BRANCH   
 3. ask for a pull request:
-   - git push minitreeFork master
+   - git push origin master
    - ask for pull request on the web
 
 Working example
