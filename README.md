@@ -8,6 +8,7 @@ Install
 --------
 
 ** replace username in the following by your actual git user name **
+
 1. Fork MinitreeFitter in https://github.com/fcouderc/MinitreeFitter
 2. Go to an lxplus machine (SLC6 but SLC5 should work just as good)
 3. Download MinitreeFitter:
@@ -44,7 +45,7 @@ Working example
 ---------------
 
 ** always do setup before anything **
-source etc/scripts/setup.sh
-MiniTreeFitter -d /afs/cern.ch/work/f/fcouderc/public/minitreeFitterExample/cic
+- source etc/scripts/setup.sh
+- MiniTreeFitter -d /afs/cern.ch/work/f/fcouderc/public/minitreeFitterExample/cic
 
 
