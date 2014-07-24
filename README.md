@@ -1,7 +1,6 @@
 MinitreeFitter
 ==============
 
-
 Saclay group MinitreeFitter: make workspace and dataset for Hgg analysis
 
 *** Install:
