@@ -17,7 +17,7 @@ replace **username** in the following by your actual git user name
    - source etc/scripts/setup.sh
    - make -j 4   
 4. add your remote fork working directory
-   - git remote add minitreeFork https://github.com/cms-analysis/flashgg
+   - git remote add minitreeFork https://github.com/fcouderc/MinitreeFitter
 5. some help
    - MiniTreeFitter --help
 
