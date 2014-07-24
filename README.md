@@ -12,14 +12,14 @@ Install
 1. Fork MinitreeFitter in https://github.com/fcouderc/MinitreeFitter
 2. Go to an lxplus machine (SLC6 but SLC5 should work just as good)
 3. Download MinitreeFitter:
-- git clone git@github.com:fcouderc/MiniTreeFitter MiniTreeFitter
-- cd MiniTreeFitter
-- source etc/scripts/setup.sh
-- make -j 4   
+   - git clone git@github.com:fcouderc/MiniTreeFitter MiniTreeFitter
+   - cd MiniTreeFitter
+   - source etc/scripts/setup.sh
+   - make -j 4   
 4. add your remote fork working directory
-- git remote add minitreeFork https://github.com/cms-analysis/flashgg
+   - git remote add minitreeFork https://github.com/cms-analysis/flashgg
 5. some help
-- MiniTreeFitter --help
+   - MiniTreeFitter --help
 
 
 Committing 
