@@ -8,8 +8,8 @@ Install
 
 replace **username** in the following by your actual git user name
 
-1. Fork MinitreeFitter in https://github.com/fcouderc/MinitreeFitter
-2. Go to an lxplus machine (SLC6 but SLC5 should work just as good)
+1. Fork MinitreeFitter in https://github.com/fcouderc/MinitreeFitter  (icon in the top left of the web page)
+2. Go to a lxplus machine (SLC6 but SLC5 should work just as good)
 3. Download MinitreeFitter:
    - git clone git@github.com:**username**/MiniTreeFitter MiniTreeFitter
    - cd MiniTreeFitter
