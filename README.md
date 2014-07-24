@@ -26,14 +26,14 @@ Committing
 
 git is managing everything locally, once you are happy with a snapshot of your work, push it to github so others can use it
 
-1. adding and committing
+1. committing (you have to add file to commit list of changes)
    - git add <files> <dirs>   /// files or dirs that have been changed and that you want to commit
    - git commit -m "message"  /// commit what was added
    - git status               /// check the status of the snapshot
    - git remote -v            /// gets the info of the remote github dir, useful to get the ALIAS of these directories
         	                    /// (the first name is probably origin, second one is probably minitreeFork)
    - git push ALIAS BRANCH (to push your snapshot, BRANCH probably master)
-2. fetching from remote dir or pull:
+2. fetching from remote dir or pull (pull will fetch from remote and merge in your local git):
    - git fetch ALIAS BRANCH   
    - git pull ALIAS BRANCH   
 3. ask for a pull request:
