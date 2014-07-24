@@ -94,7 +94,7 @@ int main( int nargc, char **argv ) {
   }
 
   // ----  prepare the fitter ---- //
-  string hlFactoryCard = "mva_sm_model_cond.rs";
+  string hlFactoryCard = "etc/workspaceConfig/mva_sm_model_cond.rs";
   MiniTreeFitter1D fitter(hlFactoryCard);
   fitter.setPlotDirectory("workspace_SM/" + categorisation + "/");
   // fitter.setMainCut( basicCut );
