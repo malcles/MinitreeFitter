@@ -19,7 +19,9 @@ Saclay group MinitreeFitter: make workspace and dataset for Hgg analysis
    MiniTreeFitter --help
 
 *** Committing 
+
 git is managing everything locally, once you are happy with a snapshot of your work, push it to github so others can use it
+
 1. adding and committing
    git add <files> <dirs>   /// files or dirs that have been changed and that you want to commit
    git commit -m "message"  /// commit what was added
@@ -28,14 +30,14 @@ git is managing everything locally, once you are happy with a snapshot of your w
        	                    /// (the first name is probably origin, second one is probably minitreeFork)
    git push ALIAS BRANCH (to push your snapshot, BRANCH probably master)
  2. fetching from remote dir
-   git fetch ALIAS BRANCH
-   
+   git fetch ALIAS BRANCH   
 3. ask for a pull request:
    - push snapshot in the fork aliased minitreeFork
    - ask for pull request on the web
 
 *** Working example:
-# always do setup before anything
+
+// always do setup before anything
 source etc/scripts/setup.sh
 MiniTreeFitter -d /afs/cern.ch/work/f/fcouderc/public/minitreeFitterExample/cic
 
