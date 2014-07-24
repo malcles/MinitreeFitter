@@ -9,10 +9,10 @@ Install
 
 **replace username in the following by your actual git user name**
 
-1. Fork MinitreeFitter in https://github.com/fcouderc/MinitreeFitter
+1. Fork MinitreeFitter in https://github.com/**username**/MinitreeFitter
 2. Go to an lxplus machine (SLC6 but SLC5 should work just as good)
 3. Download MinitreeFitter:
-   - git clone git@github.com:fcouderc/MiniTreeFitter MiniTreeFitter
+   - git clone git@github.com:**username**/MiniTreeFitter MiniTreeFitter
    - cd MiniTreeFitter
    - source etc/scripts/setup.sh
    - make -j 4   
