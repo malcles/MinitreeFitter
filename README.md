@@ -33,8 +33,9 @@ git is managing everything locally, once you are happy with a snapshot of your w
    - git remote -v            /// gets the info of the remote github dir, useful to get the ALIAS of these directories
         	                    /// (the first name is probably origin, second one is probably minitreeFork)
    - git push ALIAS BRANCH (to push your snapshot, BRANCH probably master)
-2. fetching from remote dir
+2. fetching from remote dir or pull:
    - git fetch ALIAS BRANCH   
+   - git pull ALIAS BRANCH   
 3. ask for a pull request:
    - git push minitreeFork master
    - ask for pull request on the web
@@ -45,5 +46,6 @@ Working example
 __always do setup before anything__
    - source etc/scripts/setup.sh
    - MiniTreeFitter -d /afs/cern.ch/work/f/fcouderc/public/minitreeFitterExample/cic
+
 
 
