@@ -87,7 +87,7 @@ vector<double> MiniTreeFitter1D::modelBackground( float testMass, string suffixN
     TString pdfBkgNameCat = _pdfBkgName + TString::Format("_cat%d",c);
     RooDataSet *data_c = _dataset[c];
     TLatex tex; tex.SetNDC();
-    int nbins = int(_fitMassMax-_fitMassMin) / 1.6 ; /// Entries / GeV
+    int nbins = int(_fitMassMax-_fitMassMin) / 1.0 ; /// Entries / GeV // JM: put 1 instead of 1.6
     RooPlot* plotMgg = mass->frame(nbins);
     hMassPlot.push_back( (TH1F*)data_c->createHistogram(massVarName().c_str(),nbins) );
 
@@ -450,10 +450,13 @@ void MiniTreeFitter1D::createDataCard( string cardname, bool useAltSig) {
   //  useAltSig = false;
 
   ///--------- quick summary output  
+  for( unsigned c = 0; c < _categories.size(); ++c ) 
+    cout << TString::Format("cat%d",c) <<  " is: "<<_categoriesNames[c]<<endl; //JM
+
   cout << "===================== Data Events Yields =======================" << endl;  
   cout << "......... Lumi = " << _hlf->GetWs()->var("lumi")->getVal() << " /fb ............................" << endl;  
   for( unsigned c = 0; c < _categories.size(); ++c ) 
-    cout << TString::Format("#Events data cat%d:   ",c) << _dataset[c]->numEntries()  << endl;
+    cout << TString::Format("#Events data cat%d: ",c) << _dataset[c]->numEntries()  <<endl;
   
   cout << "================= Expected Signal Yields =======================" << endl;  
   cout << ".........Expected Signal for L = " << _hlf->GetWs()->var("lumi")->getVal() << " /fb ............................" << endl; 

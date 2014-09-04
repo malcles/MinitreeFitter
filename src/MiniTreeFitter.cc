@@ -31,7 +31,9 @@ int main( int nargc, char **argv ) {
     ("bkg" , po::value<int>(&bkgModel)   ->default_value(0)  ,"bkg model")
     ("mMin",po::value<float>(&mMin)      ->default_value(100.),"minimum mass cut")
     ("mMax",po::value<float>(&mMax)      ->default_value(180.),"maximum mass cut")
-    ("inDir,d",po::value<string>(&dirAFS)->default_value("../diphoton2012_mvaSel_cms53x_v10/"),"directory with input")
+    //("inDir,d",po::value<string>(&dirAFS)->default_value("../diphoton2012_mvaSel_cms53x_v10/"),"directory with input")
+    // JM my data dir:
+    ("inDir,d",po::value<string>(&SWdirAFS)->default_value("/afs/cern.ch/user/m/malcles/MonScratch/private/MiniTreeFitter/data/CiC/"),"directory with input") 
     ("addSig", po::value<bool>(&addSig)  ->default_value(true ),"add signal" )
     ("addBkg", po::value<bool>(&addBkg)  ->default_value(true ),"add background" )
     ("simFit", po::value<bool>(&simFit)  ->default_value(false),"simultaneous fit" )
@@ -41,7 +43,7 @@ int main( int nargc, char **argv ) {
 
     ;
   
-  po::variables_map vm;
+  po::variables_map vm;SW
   po::store(po::command_line_parser(nargc, argv).
 	    options(config).run(), vm);
   po::notify(vm);
@@ -69,6 +71,7 @@ int main( int nargc, char **argv ) {
 
   // ----  Define the categories ---- //
   vector<TCut> smCategories;
+  vector<TString> smCatNames;
   vector<int>  polOrder;
   if( categorisation == "mva" ) {
     smCategories.push_back( "catMva == 0" ); polOrder.push_back( 5 );
@@ -76,10 +79,27 @@ int main( int nargc, char **argv ) {
     smCategories.push_back( "catMva == 2" ); polOrder.push_back( 5 );
     smCategories.push_back( "catMva == 3" ); polOrder.push_back( 5 );   
   } else if( categorisation == "cicpf" ) {
-    smCategories.push_back( "tagCat == 8 && abs(dEtaJJ) > 3" ); polOrder.push_back( 3 );
-    smCategories.push_back( "tagCat == 8 && abs(dEtaJJ) < 3" ); polOrder.push_back( 5 );
-    //    smCategories.push_back( "catBase == 2" ); polOrder.push_back( 4 );
-    //    smCategories.push_back( "catBase == 3" ); polOrder.push_back( 4 );
+    //smCategories.push_back( "tagCat == 8 && abs(dEtaJJ) > 3" ); polOrder.push_back( 3 );
+    //smCategories.push_back( "tagCat == 8 && abs(dEtaJJ) < 3" ); polOrder.push_back( 5 );   
+
+    // JM: try more categories with my ntuples:
+    //==========================================
+    smCategories.push_back( "tagCat < 0 && untagCat==0 " ); polOrder.push_back( 4 ); smCatNames.push_back("untag_0");  // untag 0
+    smCategories.push_back( "tagCat < 0 && untagCat==1 " ); polOrder.push_back( 5 ); smCatNames.push_back("untag_1");  // untag 1
+    smCategories.push_back( "tagCat < 0 && untagCat==2 " ); polOrder.push_back( 4 ); smCatNames.push_back("untag_2");  // untag 2
+    smCategories.push_back( "tagCat < 0 && untagCat==3 " ); polOrder.push_back( 5 ); smCatNames.push_back("untag_3");  // untag 3
+    smCategories.push_back( "tagCat < 0 && untagCat==4 " ); polOrder.push_back( 4 ); smCatNames.push_back("untag_4");  // untag 4
+    smCategories.push_back( "tagCat < 0 && untagCat==5 " ); polOrder.push_back( 5 ); smCatNames.push_back("untag_5"); // untag 5
+    smCategories.push_back( "tagCat < 0 && untagCat==6 " ); polOrder.push_back( 4 ); smCatNames.push_back("untag_6"); // untag 6
+    smCategories.push_back( "tagCat < 0 && untagCat==7 " ); polOrder.push_back( 5 ); smCatNames.push_back("untag_7"); // untag 7
+    smCategories.push_back( "tagCat == 8 " ); polOrder.push_back( 3 ); smCatNames.push_back("vbf_tig"); // vbf 
+    smCategories.push_back( "tagCat == 9 " ); polOrder.push_back( 3 ); smCatNames.push_back("vbf_loo"); // vbf
+    smCategories.push_back( "tagCat == 10 " ); polOrder.push_back( 2 ); smCatNames.push_back("vhl_tig"); // vh
+    smCategories.push_back( "tagCat == 11 " ); polOrder.push_back( 4 ); smCatNames.push_back("vhl_loo"); // vh
+    smCategories.push_back( "tagCat == 12 " ); polOrder.push_back( 3 ); smCatNames.push_back("vh_met "); // vh
+    smCategories.push_back( "tagCat == 13 " ); polOrder.push_back( 2 ); smCatNames.push_back("tth_lep"); // tth
+    smCategories.push_back( "tagCat == 14" ); polOrder.push_back( 2 ); smCatNames.push_back("tth_had"); // tth
+    smCategories.push_back( "tagCat == 15 " ); polOrder.push_back( 3 ); smCatNames.push_back("vh_had "); // vhhad
   }
 
   vector<int> polOrderCuts;
@@ -102,13 +122,15 @@ int main( int nargc, char **argv ) {
   string mName = "mass";
   //  RooRealVar *catMva   = new RooRealVar( "catMva"  ,"",-999,10.0); fitter.addVariable( catMva   );
   //  RooRealVar *diphoMva = new RooRealVar( "diphoMva","",-3  ,10.0); fitter.addVariable( diphoMva );
-  RooRealVar *catBase = new RooRealVar( "tagCat" ,"",-999,10.0); fitter.addVariable( catBase  );
+  RooRealVar *catBase = new RooRealVar( "tagCat" ,"",-999,30.0); fitter.addVariable( catBase  );
+  RooRealVar *catBaseUntag = new RooRealVar( "untagCat" ,"",-999,30.0); fitter.addVariable( catBaseUntag  );
   RooRealVar *dEtaJJ  = new RooRealVar( "dEtaJJ" ,"",-999,10.0); fitter.addVariable( dEtaJJ  );
   RooRealVar *mass    = new RooRealVar( mName.c_str(),"",mMin,mMax); fitter.addVariable( mass     );
   fitter.setMassVarName( mName );
   fitter.setMassVarSet(true);
 
   fitter.setCategories( smCatCuts );
+  fitter.setCategoriesNames( smCatNames );
   fitter.setMassMin(mMin);
   fitter.setMassMax(mMax);
 
@@ -129,11 +151,12 @@ int main( int nargc, char **argv ) {
     vector<string> sFiles1, sNames1;
     vector<float>  sXsec1;
     //    sFiles1.push_back( dirMC + "/mc/job_hgg_gg0odd.root_0.root" );  sNames1.push_back( "spin 0+" ); sXsec1.push_back(20*1000);
-    //    sFiles1.push_back( dirMC + TString::Format("job_summer12_ggH_%3.0f.root_0.root",mh).Data()  );  sNames1.push_back( "ggH"); sXsec1.push_back(xsec_ggh);
-    //    sFiles1.push_back( dirMC + TString::Format("job_summer12_VBF_%3.0f.root_0.root",mh).Data()  );  sNames1.push_back( "VBF"); sXsec1.push_back(xsec_vbf);
+    sFiles1.push_back( dirMC + TString::Format("job_summer12_ggH_%3.0f.root_0.root",mh).Data()  );  sNames1.push_back( "ggH"); sXsec1.push_back(xsec_ggh);
     sFiles1.push_back( dirMC + TString::Format("job_summer12_VBF_%3.0f.root_0.root",mh).Data()  );  sNames1.push_back( "VBF"); sXsec1.push_back(xsec_vbf);
-    //    sFiles1.push_back( dirMC + TString::Format("job_summer12_WH_ZH_%3.0f.root_0.root",mh).Data());  sNames1.push_back( "VH" ); sXsec1.push_back(xsec_vh );
-    //    sFiles1.push_back( dirMC + TString::Format("job_summer12_TTH_%3.0f.root_0.root",mh).Data()  );  sNames1.push_back( "ttH"); sXsec1.push_back(xsec_tth);
+    sFiles1.push_back( dirMC + TString::Format("job_summer12_WH_ZH_%3.0f.root_0.root",mh).Data());  sNames1.push_back( "VH" ); sXsec1.push_back(xsec_vh );
+    sFiles1.push_back( dirMC + TString::Format("job_summer12_TTH_%3.0f.root_0.root",mh).Data()  );  sNames1.push_back( "ttH"); sXsec1.push_back(xsec_tth); 
+
+    
     fitter.addSigSamples(sFiles1,sXsec1,sNames1,br,lumi);
     if( doFits) {    
       fitter.modelSignal(125,categorySuffix);
@@ -144,6 +167,7 @@ int main( int nargc, char **argv ) {
   float signi = -1;
   vector<double> signis;
   if( addBkg ) {
+
     //    string dataset = dirData + "MiniTreeData_2012abcd.root";
     string dataset = dirData + "data_8TeV_skimMVA_runABCD.root";
 

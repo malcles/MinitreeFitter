@@ -38,6 +38,7 @@ public:
   inline ~MiniTreeFitter1D(void);
   inline void setMainCut( TCut cut ) { _mainCut = cut;}
   inline void setCategories( std::vector<TCut> cuts ) { _categories = cuts; }
+  inline void setCategoriesNames( std::vector<TString> names ) { _categoriesNames = names; } // JM
   inline void setPolynomialOrder(std::vector<int> polOrder) {_polynomialOrder = polOrder; }
   inline void setPlotDirectory( std::string dir );
   inline void addVariable( RooRealVar *v ) {  _variables.add(*v); }
@@ -99,6 +100,7 @@ private:
   TCut _blindingCut;
   TCut _mainCut;
   std::vector<TCut> _categories;
+  std::vector<TString> _categoriesNames;
   std::vector<int>  _polynomialOrder;
   std::vector<std::vector<RooDataSet*> > _datasetSignalWoXS;
   std::vector<std::vector<RooDataSet*> > _datasetSignalWiXS;
